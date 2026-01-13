@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--noir);
+            color: var(--blanc);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: var(--blanc);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .gallery-page {
+            margin-top: 8rem;
+            padding: 4rem;
+            max-width: 1800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            color: var(--gris);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            background: #1a1a1a;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+            filter: grayscale(0.2);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .overlay-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 1400px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .gallery-page {
+                padding: 2rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <div class="gallery-page">
+        <h1 class="page-title">Photo Gallery</h1>
+        <p class="page-subtitle">Capturing the essence of music</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=1200&h=1200&fit=crop', 'Backstage Festival 2026')">
+                <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop" alt="Backstage Festival">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Backstage Festival 2026</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=1200&h=1200&fit=crop', 'Artist Portrait Session')">
+                <img src="https://images.unsplash.com/photo-1446057032654-9d8885db76c6?w=400&h=400&fit=crop" alt="Artist Portrait">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Artist Portrait Session</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&h=1200&fit=crop', 'Electronic Concert')">
+                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" alt="Electronic Concert">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Electronic Concert</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1506157786151-b8491531f063?w=1200&h=1200&fit=crop', 'Studio Recording Session')">
+                <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?w=400&h=400&fit=crop" alt="Studio Session">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Studio Recording Session</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=1200&h=1200&fit=crop', 'Vinyl Collection')">
+                <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=400&h=400&fit=crop" alt="Vinyl Collection">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Vinyl Collection</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=1200&h=1200&fit=crop', 'Rock Arena Performance')">
+                <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&h=400&fit=crop" alt="Rock Arena">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Rock Arena Performance</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=1200&h=1200&fit=crop', 'DJ Set at Sunrise')">
+                <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=400&h=400&fit=crop" alt="DJ Set">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">DJ Set at Sunrise</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=1200&h=1200&fit=crop', 'Crowd Energy')">
+                <img src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=400&h=400&fit=crop" alt="Crowd">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Crowd Energy</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&h=1200&fit=crop', 'Music Festival Lights')">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" alt="Festival Lights">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Music Festival Lights</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=1200&h=1200&fit=crop', 'Live Concert Moment')">
+                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&h=400&fit=crop" alt="Live Concert">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Live Concert Moment</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1200&h=1200&fit=crop', 'Headphones on Mixer')">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop" alt="Headphones">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Headphones on Mixer</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=1200&h=1200&fit=crop', 'Music Production Setup')">
+                <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=400&h=400&fit=crop" alt="Production">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Music Production Setup</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=1200&h=1200&fit=crop', 'Hip-Hop Culture')">
+                <img src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=400&h=400&fit=crop" alt="Hip-Hop">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Hip-Hop Culture</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1485579149621-3123dd979885?w=1200&h=1200&fit=crop', 'Jazz Performance')">
+                <img src="https://images.unsplash.com/photo-1485579149621-3123dd979885?w=400&h=400&fit=crop" alt="Jazz">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Jazz Performance</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=1200&fit=crop', 'Music Video Shoot')">
+                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=400&fit=crop" alt="Video Shoot">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Music Video Shoot</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=1200&h=1200&fit=crop', 'Guitar Close-up')">
+                <img src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=400&fit=crop" alt="Guitar">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Guitar Close-up</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&h=1200&fit=crop', 'Microphone Studio')">
+                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop" alt="Microphone">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Microphone Studio</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=1200&h=1200&fit=crop', 'Piano Keys')">
+                <img src="https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=400&h=400&fit=crop" alt="Piano">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Piano Keys</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=1200&fit=crop', 'Artist Backstage')">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Backstage">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Artist Backstage</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=1200&h=1200&fit=crop', 'Turntable DJ')">
+                <img src="https://images.unsplash.com/photo-1493676304819-0d7a8d026dcf?w=400&h=400&fit=crop" alt="Turntable">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Turntable DJ</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=1200&h=1200&fit=crop', 'Stage Lighting')">
+                <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=400&h=400&fit=crop" alt="Stage">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Stage Lighting</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=1200&h=1200&fit=crop', 'Drum Set')">
+                <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400&h=400&fit=crop" alt="Drums">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Drum Set</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1458560871784-56d23406c091?w=1200&h=1200&fit=crop', 'Outdoor Festival')">
+                <img src="https://images.unsplash.com/photo-1458560871784-56d23406c091?w=400&h=400&fit=crop" alt="Outdoor Festival">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Outdoor Festival</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1519683109079-d5f539e1542f?w=1200&h=1200&fit=crop', 'Saxophone Player')">
+                <img src="https://images.unsplash.com/photo-1519683109079-d5f539e1542f?w=400&h=400&fit=crop" alt="Saxophone">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Saxophone Player</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1499415479124-43c32433a620?w=1200&h=1200&fit=crop', 'Bass Guitar')">
+                <img src="https://images.unsplash.com/photo-1499415479124-43c32433a620?w=400&h=400&fit=crop" alt="Bass">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Bass Guitar</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=1200&h=1200&fit=crop', 'Concert Crowd Hands Up')">
+                <img src="https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400&h=400&fit=crop" alt="Crowd Hands">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Concert Crowd Hands Up</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1200&h=1200&fit=crop', 'Music Notes')">
+                <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=400&fit=crop" alt="Music Notes">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Music Notes</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1510906594845-bc082582c8cc?w=1200&h=1200&fit=crop', 'Sound Engineer')">
+                <img src="https://images.unsplash.com/photo-1510906594845-bc082582c8cc?w=400&h=400&fit=crop" alt="Sound Engineer">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Sound Engineer</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1475669698648-2f144fcaaeb1?w=1200&h=1200&fit=crop', 'Band Rehearsal')">
+                <img src="https://images.unsplash.com/photo-1475669698648-2f144fcaaeb1?w=400&h=400&fit=crop" alt="Band">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Band Rehearsal</div>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=1200&h=1200&fit=crop', 'Indie Rock Show')">
+                <img src="https://images.unsplash.com/photo-1471478331149-c72f17e33c73?w=400&h=400&fit=crop" alt="Indie Rock">
+                <div class="gallery-overlay">
+                    <div class="overlay-text">Indie Rock Show</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-caption').textContent = caption;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

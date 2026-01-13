@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader Reviews - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+            --star-gold: #ffc107;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gris-clair);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: var(--noir);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .reviews-page {
+            margin-top: 8rem;
+            padding: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .overall-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .rating-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .rating-stars {
+            font-size: 2rem;
+            color: var(--star-gold);
+        }
+
+        .rating-count {
+            color: var(--gris);
+            font-size: 1rem;
+        }
+
+        .reviews-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #ff6699);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .reviewer-details h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .review-date {
+            color: var(--gris);
+            font-size: 0.85rem;
+        }
+
+        .review-rating {
+            color: var(--star-gold);
+            font-size: 1.2rem;
+        }
+
+        .review-text {
+            color: var(--noir);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .review-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .reply-btn {
+            padding: 0.6rem 1.5rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .reply-btn:hover {
+            background: #ff1a4d;
+            transform: translateY(-2px);
+        }
+
+        .reply-section {
+            display: none;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gris-clair);
+        }
+
+        .reply-section.active {
+            display: block;
+        }
+
+        .reply-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .reply-textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gris-clair);
+            border-radius: 5px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .reply-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .reply-submit {
+            align-self: flex-start;
+            padding: 0.8rem 2rem;
+            background: var(--noir);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .reply-submit:hover {
+            background: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .reviews-page {
+                padding: 2rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .overall-rating {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .rating-number {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <div class="reviews-page">
+        <div class="page-header">
+            <h1 class="page-title">Reader Reviews</h1>
+            
+            <div class="overall-rating">
+                <div class="rating-number">4.7</div>
+                <div>
+                    <div class="rating-stars">★★★★★</div>
+                    <div class="rating-count">Based on 20 reviews</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-container">
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">SJ</div>
+                        <div class="reviewer-details">
+                            <h3>Sarah Johnson</h3>
+                            <div class="review-date">December 28, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">REVERB is hands down the best music magazine I've come across! The articles are insightful, well-researched, and cover a diverse range of genres. I especially love the AI and music coverage.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">MT</div>
+                        <div class="reviewer-details">
+                            <h3>Michael Torres</h3>
+                            <div class="review-date">December 25, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">Finally, a music publication that takes hip-hop seriously! The Grammy coverage was exceptional and the analysis of streaming trends is always spot-on.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">EC</div>
+                        <div class="reviewer-details">
+                            <h3>Emma Chen</h3>
+                            <div class="review-date">December 22, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★☆</div>
+                </div>
+                <p class="review-text">Great content overall. The photo gallery is stunning and the articles are engaging. Would love to see more international music coverage though!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">DW</div>
+                        <div class="reviewer-details">
+                            <h3>David Williams</h3>
+                            <div class="review-date">December 20, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">The article about streaming platforms improving music discovery was brilliant. REVERB consistently delivers high-quality journalism that matters to music lovers.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 5 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">LP</div>
+                        <div class="reviewer-details">
+                            <h3>Lisa Patterson</h3>
+                            <div class="review-date">December 18, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">I discovered so many new artists through REVERB! The New School article was incredibly informative and well-balanced. Keep up the amazing work!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 6 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">JM</div>
+                        <div class="reviewer-details">
+                            <h3>James Martinez</h3>
+                            <div class="review-date">December 15, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★☆</div>
+                </div>
+                <p class="review-text">Solid magazine with great writing. The Taylor Swift analysis was thought-provoking. My only suggestion would be more frequent updates!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 7 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">AN</div>
+                        <div class="reviewer-details">
+                            <h3>Aisha Ndlovu</h3>
+                            <div class="review-date">December 12, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">The Stormzy article about racism in the UK music industry was powerful and necessary. REVERB isn't afraid to tackle important social issues through music.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 8 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">RK</div>
+                        <div class="reviewer-details">
+                            <h3>Ryan Kim</h3>
+                            <div class="review-date">December 10, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">Love the clean, modern design and the quality of writing. The piece about music during revision helped me understand my own study habits better!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 9 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">OB</div>
+                        <div class="reviewer-details">
+                            <h3>Olivia Brown</h3>
+                            <div class="review-date">December 8, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">Best music journalism online! The Weeknd tour cancellation article was breaking news done right. Always my first stop for music news.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 10 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">TL</div>
+                        <div class="reviewer-details">
+                            <h3>Thomas Lee</h3>
+                            <div class="review-date">December 5, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★☆</div>
+                </div>
+                <p class="review-text">Excellent content and beautiful layout. The UMG and AI partnership article was eye-opening. Would be nice to have a podcast version!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 11 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">NP</div>
+                        <div class="reviewer-details">
+                            <h3>Nina Patel</h3>
+                            <div class="review-date">December 3, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">The photography gallery is absolutely stunning. Combined with intelligent articles, REVERB offers the complete package for music enthusiasts.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 12 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">CA</div>
+                        <div class="reviewer-details">
+                            <h3>Carlos Alvarez</h3>
+                            <div class="review-date">December 1, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">As a gym enthusiast, the "Music Is the Fuel of Daily Life" article really resonated with me. REVERB understands how music impacts all aspects of our lives.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 13 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">MR</div>
+                        <div class="reviewer-details">
+                            <h3>Maria Rodriguez</h3>
+                            <div class="review-date">November 28, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">I've been following REVERB since launch and it just keeps getting better. The Billie Eilish AI crisis coverage was both timely and thoughtful.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 14 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">BH</div>
+                        <div class="reviewer-details">
+                            <h3>Benjamin Harris</h3>
+                            <div class="review-date">November 25, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★☆</div>
+                </div>
+                <p class="review-text">Really appreciate the balanced approach to controversial topics. The articles are never preachy, just well-researched and fair. Great job!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 15 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">SF</div>
+                        <div class="reviewer-details">
+                            <h3>Sophie Foster</h3>
+                            <div class="review-date">November 22, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">The global music streaming article opened my eyes to trends I wasn't aware of. REVERB consistently delivers insights I can't find elsewhere.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 16 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">KO</div>
+                        <div class="reviewer-details">
+                            <h3>Kevin O'Brien</h3>
+                            <div class="review-date">November 20, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">Love the mix of breaking news and thoughtful analysis. The site design is beautiful and easy to navigate. Highly recommend to all music fans!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 17 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">HN</div>
+                        <div class="reviewer-details">
+                            <h3>Hannah Nguyen</h3>
+                            <div class="review-date">November 18, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★☆</div>
+                </div>
+                <p class="review-text">Fantastic writing and diverse perspectives. The AI and music coverage is particularly strong. Would love more live concert reviews!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 18 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">AL</div>
+                        <div class="reviewer-details">
+                            <h3>Anthony Lewis</h3>
+                            <div class="review-date">November 15, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">REVERB is a breath of fresh air in music journalism. No clickbait, just honest and intelligent coverage of music and culture. Five stars!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 19 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">ZA</div>
+                        <div class="reviewer-details">
+                            <h3>Zara Ahmed</h3>
+                            <div class="review-date">November 12, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">The team behind REVERB clearly loves music and it shows in every article. The writing quality is consistently excellent and the topics are always relevant.</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review 20 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-avatar">IK</div>
+                        <div class="reviewer-details">
+                            <h3>Isaac King</h3>
+                            <div class="review-date">November 10, 2025</div>
+                        </div>
+                    </div>
+                    <div class="review-rating">★★★★★</div>
+                </div>
+                <p class="review-text">From mainstream pop to underground hip-hop, REVERB covers it all with equal passion and expertise. This is my go-to source for music news and culture!</p>
+                <div class="review-actions">
+                    <button class="reply-btn" onclick="toggleReply(this)">Reply</button>
+                </div>
+                <div class="reply-section">
+                    <form class="reply-form" onsubmit="submitReply(event)">
+                        <textarea class="reply-textarea" placeholder="Write your reply..."></textarea>
+                        <button type="submit" class="reply-submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleReply(button) {
+            const replySection = button.parentElement.nextElementSibling;
+            replySection.classList.toggle('active');
+            button.textContent = replySection.classList.contains('active') ? 'Cancel' : 'Reply';
+        }
+
+        function submitReply(event) {
+            event.preventDefault();
+            const form = event.target;
+            const textarea = form.querySelector('.reply-textarea');
+            
+            if (textarea.value.trim()) {
+                alert('Thank you for your reply! It has been submitted to the REVERB team.');
+                textarea.value = '';
+                form.closest('.reply-section').classList.remove('active');
+                form.closest('.review-card').querySelector('.reply-btn').textContent = 'Reply';
+            }
+        }
+    </script>
+</body>
+</html>

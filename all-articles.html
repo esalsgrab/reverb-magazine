@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Articles - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gris-clair);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: var(--noir);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .articles-page {
+            margin-top: 8rem;
+            padding: 4rem;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            color: var(--gris);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .article-card {
+            background: white;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .article-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.1);
+        }
+
+        .article-content {
+            padding: 2rem 0;
+        }
+
+        .article-category {
+            color: var(--accent);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            color: var(--noir);
+        }
+
+        .article-excerpt {
+            color: var(--gris);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--gris);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1200px) {
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .articles-page {
+                padding: 2rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <div class="articles-page">
+        <h1 class="page-title">All Articles</h1>
+        <p class="page-subtitle">Explore all our music coverage</p>
+
+        <div class="articles-grid">
+            <!-- Featured Article -->
+            <article class="article-card">
+                <a href="article-streaming-record.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-000.jpg" alt="Dave Psychodrama">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Streaming</div>
+                        <h3 class="article-title">Global Music Streaming Reaches New Record in 2025</h3>
+                        <p class="article-excerpt">Music fans around the world streamed more music than ever before in 2025, setting a new global record on major platforms.</p>
+                        <div class="article-meta">
+                            <span>Nov 19, 2025</span>
+                            <span>• Maya EL Kordy</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- AI Article -->
+            <article class="article-card">
+                <a href="article-ai-music.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-001.jpg" alt="Haven Run Album">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">AI & Music</div>
+                        <h3 class="article-title">AI is Threatening Real Music - and Artists Deserve Protection</h3>
+                        <p class="article-excerpt">The viral success of "RUN" by HAVEN in 2025 highlights how easily real musicians can lose recognition for their own work.</p>
+                        <div class="article-meta">
+                            <span>Nov 26, 2025</span>
+                            <span>• Maya EL Kordy</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- The Weeknd -->
+            <article class="article-card">
+                <a href="article-weeknd-tour.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-002.jpg" alt="The Weeknd">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Breaking News</div>
+                        <h3 class="article-title">The Weeknd Cancels World Tour After Mysterious Sound Experiment Fails</h3>
+                        <p class="article-excerpt">The international pop star canceled his entire world tour after a secret test concert with 3D audio technology went badly.</p>
+                        <div class="article-meta">
+                            <span>Nov 21, 2025</span>
+                            <span>• Agathe Cadoux</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- New School -->
+            <article class="article-card">
+                <a href="article-newschool.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-003.jpg" alt="New School Netflix">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">TV Shows</div>
+                        <h3 class="article-title">The New Season of "New School" Sparks Controversy</h3>
+                        <p class="article-excerpt">Netflix's rap competition show faced criticism over its winner and jury decisions, despite helping launch new artists' careers.</p>
+                        <div class="article-meta">
+                            <span>Dec 12, 2025</span>
+                            <span>• John Lhin</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Streaming Discovery -->
+            <article class="article-card">
+                <a href="article-streaming-discovery.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-004.jpg" alt="Music Discovery">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Streaming</div>
+                        <h3 class="article-title">Have Streaming Platforms Improved the Way People Discover New Music?</h3>
+                        <p class="article-excerpt">Streaming platforms have revolutionized music discovery through personalized recommendations and global catalogs.</p>
+                        <div class="article-meta">
+                            <span>Dec 28, 2025</span>
+                            <span>• Alexandre Hacques</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Grammys Rap -->
+            <article class="article-card">
+                <a href="article-grammys-rap.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-005.jpg" alt="Grammy Awards">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Awards</div>
+                        <h3 class="article-title">Rap Takes the Lead at the Grammy Nominations</h3>
+                        <p class="article-excerpt">Kendrick Lamar leads with nine nominations as hip-hop dominates the 2026 Grammy Awards across major categories.</p>
+                        <div class="article-meta">
+                            <span>Dec 5, 2025</span>
+                            <span>• Samuel Elgrably</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Stormzy Racism -->
+            <article class="article-card">
+                <a href="article-stormzy-racism.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-006.jpg" alt="Stormzy">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Social Issues</div>
+                        <h3 class="article-title">Stormzy Uses Music to Speak Out Against Racism in the UK</h3>
+                        <p class="article-excerpt">British rapper releases powerful new project addressing everyday racism and inequality faced by Black people in Britain.</p>
+                        <div class="article-meta">
+                            <span>Dec 11, 2025</span>
+                            <span>• Samuel Elgrably</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Taylor Swift -->
+            <article class="article-card">
+                <a href="article-taylorswift-evolution.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-007.jpg" alt="Taylor Swift">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Analysis</div>
+                        <h3 class="article-title">Taylor Swift: Artistic Evolution or Commercial Mastery?</h3>
+                        <p class="article-excerpt">Examining the balance between genuine artistic expression and strategic branding in one of music's biggest careers.</p>
+                        <div class="article-meta">
+                            <span>Jan 4, 2026</span>
+                            <span>• Alexandre Hacques</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Music Revision -->
+            <article class="article-card">
+                <a href="article-music-revision.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-008.jpg" alt="Student Studying">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Education</div>
+                        <h3 class="article-title">Listening to Music During Revision: A Helpful Tool or a Hidden Distraction?</h3>
+                        <p class="article-excerpt">Exploring the debate around whether music helps or hinders students during study sessions and exam preparation.</p>
+                        <div class="article-meta">
+                            <span>Dec 22, 2025</span>
+                            <span>• John Lin</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Music Fuel -->
+            <article class="article-card">
+                <a href="article-music-fuel.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-009.jpg" alt="Music Daily Life">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Lifestyle</div>
+                        <h3 class="article-title">Music Is the Fuel of Daily Life</h3>
+                        <p class="article-excerpt">How music energizes athletes, enhances daily routines, and connects communities through concerts and shared experiences.</p>
+                        <div class="article-meta">
+                            <span>Dec 1, 2025</span>
+                            <span>• Iwan Saleh</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- UMG Udio -->
+            <article class="article-card">
+                <a href="article-umg-udio.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-010.jpg" alt="AI Music">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Industry</div>
+                        <h3 class="article-title">Universal Music Group Pivots from Lawsuit to Partnership with AI Music Firm</h3>
+                        <p class="article-excerpt">Major label reaches agreement with Udio after copyright lawsuit, marking shift in industry approach to AI music production.</p>
+                        <div class="article-meta">
+                            <span>Nov 29, 2025</span>
+                            <span>• Iwan Saleh</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Billie Eilish AI Crisis -->
+            <article class="article-card">
+                <a href="article-billie-ai-crisis.html" style="text-decoration: none; color: inherit;">
+                    <div class="article-image">
+                        <img src="article-img-011.jpg" alt="Billie Eilish">
+                    </div>
+                    <div class="article-content">
+                        <div class="article-category">Breaking News</div>
+                        <h3 class="article-title">Billie Eilish Postpones New Album After AI Collaboration Sparks Internal Crisis</h3>
+                        <p class="article-excerpt">Pop star delays release following technical failures with AI-powered harmonies, citing concerns over artistic integrity.</p>
+                        <div class="article-meta">
+                            <span>Jan 7, 2026</span>
+                            <span>• Agathe Cadoux</span>
+                        </div>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </div>
+</body>
+</html>

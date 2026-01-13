@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rap Takes the Lead at Grammy Nominations - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gris-clair);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--noir);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .article-hero {
+            margin-top: 6rem;
+            padding: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-category {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            color: var(--gris);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-image-full {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            margin-bottom: 3rem;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .article-hero {
+                padding: 2rem;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <article class="article-hero">
+        <div class="article-category">Awards</div>
+        <h1 class="article-title">Rap Takes the Lead at the Grammy Nominations</h1>
+        <div class="article-meta">Saturday, December 5, 2025 • Samuel Elgrably</div>
+        
+        <img src="article-img-005.jpg" alt="Grammy Awards Hip-Hop" class="article-image-full">
+        
+        <div class="article-content">
+            <p>Rap and hip-hop artists are at the forefront of the 2026 Grammy Award nominations, with several major categories dominated by nominees from the genre, according to the Recording Academy.</p>
+            
+            <p>Leading the pack is rapper Kendrick Lamar, who received nine nominations — including Album of the Year for GNX, Best Rap Album and major general field categories such as Record of the Year and Song of the Year. Other hip-hop artists like Clipse, Doechii and Tyler, The Creator also earned multiple nods across genre and general categories, reflecting strong industry recognition for rap music this year.</p>
+            
+            <p>Nominees for Best Rap Song and Best Rap Performance include tracks from Cardi B, GloRilla, and Kendrick Lamar, among others, showcasing a range of contemporary hip-hop achievements. The nominations list was officially released on November 7, with the awards ceremony scheduled for February 1, 2026, at the Crypto.com Arena in Los Angeles.</p>
+            
+            <p>Industry analysts say the prominence of rap and hip-hop in this year's Grammys highlights the genre's continued influence on mainstream music, as artists push creative boundaries and achieve commercial success.</p>
+        </div>
+    </article>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Is the Fuel of Daily Life - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gris-clair);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--noir);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .article-hero {
+            margin-top: 6rem;
+            padding: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-category {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            color: var(--gris);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-image-full {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            margin-bottom: 3rem;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .article-hero {
+                padding: 2rem;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <article class="article-hero">
+        <div class="article-category">Lifestyle</div>
+        <h1 class="article-title">Music Is the Fuel of Daily Life</h1>
+        <div class="article-meta">Monday, December 1, 2025 • Iwan Saleh</div>
+        
+        <img src="article-img-009.jpg" alt="Music in Daily Life" class="article-image-full">
+        
+        <div class="article-content">
+            <p>Music affects millions of people, especially students and athletes like me, who depend on it every day. I listen to music at the gym, in the morning, and when I drive. It gives me energy and focus. A strong beat pushes me beyond my limits and helps me do one more rep. Studies show that music boosts motivation and reduces fatigue, which explains why athletes train with headphones.</p>
+            
+            <p>In 2024 and 2025, music is available instantly. Streaming platforms like Spotify and Apple Music dominate charts, while TikTok can make a song viral overnight. Music is everywhere we go. Yet concerts remain the most powerful experience. When thousands of people sing the same song, the energy becomes electric, and everyone feels connected. Concerts also support the economy by creating jobs, attracting tourism, and generating revenue for local businesses.</p>
+            
+            <p>Music is more than entertainment. It structures our emotions and routines. Schools and cities should support music education, local events, and safe concert spaces. Life is better with a soundtrack.</p>
+        </div>
+    </article>
+</body>
+</html>

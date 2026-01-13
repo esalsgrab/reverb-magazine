@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listening to Music During Revision - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gris-clair);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--noir);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .article-hero {
+            margin-top: 6rem;
+            padding: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-category {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            color: var(--gris);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-image-full {
+            width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            margin-bottom: 3rem;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .article-hero {
+                padding: 2rem;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <article class="article-hero">
+        <div class="article-category">Education</div>
+        <h1 class="article-title">Listening to Music During Revision: A Helpful Tool or a Hidden Distraction?</h1>
+        <div class="article-meta">Sunday, December 22, 2025 • John Lin</div>
+        
+        <img src="article-img-008.jpg" alt="Student Studying with Music" class="article-image-full">
+        
+        <div class="article-content">
+            <p>As exam pressure continues to rise among students, many are turning to music as a study companion during revision. While listening to music is often praised for improving focus and reducing stress, its effectiveness during revision remains a topic of debate. A critical examination shows that although music can be beneficial for some learners, it may also hinder concentration and academic performance for others.</p>
+            
+            <p>Supporters of studying with music argue that it helps improve focus by blocking out environmental distractions. In noisy households or public spaces, background music can create a sense of privacy and consistency, allowing students to concentrate more effectively. Calm, instrumental genres such as classical or lo-fi are often recommended, as they are less likely to interrupt thought processes.</p>
+            
+            <p>Music is also widely recognised for its role in reducing stress. During intense revision periods, students frequently experience anxiety, which can negatively affect memory and understanding. Soft, slow-paced music may help regulate emotions, making revision feel more manageable. From this perspective, music serves not only as a study aid but also as a coping mechanism for academic pressure.</p>
+            
+            <p>However, critics argue that music can easily become a distraction rather than a support. Songs with lyrics, fast beats, or sudden changes can compete for attention, especially during tasks that require reading, writing, or problem-solving. Cognitive research suggests that the brain has limited attention capacity, and dividing it between music and complex revision may reduce the quality of learning.</p>
+            
+            <p>There is also concern that reliance on music during revision may create dependency. If students always revise with music, they may struggle to focus in exam conditions, where silence is usually enforced. This mismatch between study and assessment environments could negatively impact performance, particularly for students who depend heavily on auditory stimulation.</p>
+            
+            <p>Furthermore, the benefits of music are not universal. Individual learning styles play a significant role in determining whether music is helpful or harmful. Some students thrive in complete silence, while others perform better with background sound. Treating music as a one-size-fits-all solution ignores these differences and may lead to ineffective study habits.</p>
+            
+            <p>In conclusion, listening to music during revision is neither entirely beneficial nor entirely harmful. While it can enhance focus, reduce stress, and improve motivation for some students, it can also act as a distraction and reduce learning efficiency for others. A critical approach suggests that students should be mindful of how music affects their concentration and choose study methods that best support their individual learning needs.</p>
+        </div>
+    </article>
+</body>
+</html>

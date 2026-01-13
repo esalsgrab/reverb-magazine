@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taylor Swift: Artistic Evolution or Commercial Mastery? - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gris-clair);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--noir);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .article-hero {
+            margin-top: 6rem;
+            padding: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-category {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            color: var(--gris);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-image-full {
+            width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            margin-bottom: 3rem;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .article-hero {
+                padding: 2rem;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <article class="article-hero">
+        <div class="article-category">Analysis</div>
+        <h1 class="article-title">Taylor Swift: Artistic Evolution or Commercial Mastery?</h1>
+        <div class="article-meta">Friday, January 4, 2026 • Alexandre Hacques</div>
+        
+        <img src="article-img-007.jpg" alt="Taylor Swift Albums" class="article-image-full">
+        
+        <div class="article-content">
+            <p>Taylor Swift is one of the most influential artists of her generation, known for her ability to reinvent herself while maintaining massive commercial success. Starting as a country singer, she gradually transitioned into pop and alternative music, demonstrating remarkable adaptability. This evolution has allowed her to reach a global audience, but it also raises questions about artistic authenticity.</p>
+            
+            <p>On one hand, Swift's songwriting is often praised for its emotional honesty and storytelling. Her lyrics explore personal experiences, relationships, and self-reflection, creating a strong connection with listeners. Albums such as Folklore and Evermore show a more mature and introspective side, proving that mainstream artists can still produce meaningful work.</p>
+            
+            <p>On the other hand, critics argue that Taylor Swift's success is closely tied to strategic marketing and media presence. Her carefully crafted image and frequent releases keep her constantly visible, sometimes blurring the line between genuine artistic expression and commercial calculation.</p>
+            
+            <p>In conclusion, Taylor Swift embodies the tension between art and industry. Whether seen as a true artist or a master of branding, her impact on modern music is undeniable.</p>
+        </div>
+    </article>
+</body>
+</html>

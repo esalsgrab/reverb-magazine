@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The New Season of "New School" - REVERB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --noir: #0a0a0a;
+            --blanc: #fafafa;
+            --accent: #ff3366;
+            --gris: #8a8a8a;
+            --gris-clair: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gris-clair);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--noir);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        .article-hero {
+            margin-top: 6rem;
+            padding: 4rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .article-category {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            color: var(--gris);
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .article-image-full {
+            width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            margin-bottom: 3rem;
+            background: #000;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.9;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            .article-hero {
+                padding: 2rem;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">REVERB</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </nav>
+
+    <article class="article-hero">
+        <div class="article-category">TV Shows</div>
+        <h1 class="article-title">The New Season of "New School" Sparks Controversy</h1>
+        <div class="article-meta">Thursday, December 12, 2025 • John Lhin</div>
+        
+        <img src="article-img-003.jpg" alt="New School Netflix" class="article-image-full">
+        
+        <div class="article-content">
+            <p>In 2023, Netflix released a new rap competition show called New School. It is a competition where many young rappers come to show their skills and get the chance to win money and recognition. Season 1 of New School was very successful in 2023. It was one of the most watched series on Netflix, and a lot of people were waiting for season 2, expecting it to be just as successful. However, when season 2 was released on Netflix, many people criticized the show and the staff.</p>
+            
+            <p>One of the main controversies was about the winner, Yuzboy, a young male rapper who was accused of sexual aggression. Many viewers felt that the decision of the jury was wrong. The jury, composed of SCH, Niska and Shay, was also strongly criticized. A lot of people said the show was bad and attacked the judges' choices.</p>
+            
+            <p>Despite the criticism, New School remains a rap competition where everyone gets their chance. It gives visibility to young artists and allows participants to show their talent. Even if not everyone agrees with the results, the show helps new rappers to be discovered.</p>
+            
+            <p>New School can change people's lives because it gives opportunities to participants and winners. Many contestants say that thanks to the show, they could make music their job and reach a larger audience.</p>
+            
+            <p>In conclusion, season 2 of New School caused controversy and criticism, but it also helped change people's lives and the way rap and rappers are perceived.</p>
+        </div>
+    </article>
+</body>
+</html>
